@@ -114,7 +114,7 @@
   addEventListener('dblclick',()=>{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen().catch(()=>{})});
 
   const msgs=[...document.querySelectorAll('.msg')];let mi=0;
-  setInterval(()=>{msgs[mi].classList.remove('on');mi=(mi+1)%msgs.length;msgs[mi].classList.add('on');if(!msgs[mi].classList.contains('small')&&window.pop)pop()},5000);
+  (function step(){setTimeout(()=>{msgs[mi].classList.remove('on');mi=(mi+1)%msgs.length;msgs[mi].classList.add('on');if(!msgs[mi].classList.contains('small')&&window.pop)pop();step()},innerHeight>innerWidth?2500:5000)})();
 
   const c=document.getElementById('fx'),x=c.getContext('2d');c.width=1920;c.height=1080;
   // chandelier & candle points (screen coords after cover crop)
